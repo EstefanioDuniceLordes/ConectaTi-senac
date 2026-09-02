@@ -135,8 +135,12 @@ public class DemoDataInitializer {
     }
 
     private void migrarEnumsLegados(JdbcTemplate jdbcTemplate) {
-        jdbcTemplate.update("update usuarios set tipo = 'ADMINISTRADOR' where tipo = 'ADMIN'");
-        jdbcTemplate.update("update usuarios set tipo = 'INSTRUTOR' where tipo in ('PROFESSOR', 'ALUNO')");
-        jdbcTemplate.update("update chamados set status = 'CONCLUIDO' where status = 'FINALIZADO'");
+        try {
+            jdbcTemplate.update("update usuarios set tipo = 'ADMINISTRADOR' where cast(tipo as varchar) = 'ADMIN'");
+            jdbcTemplate.update("update usuarios set tipo = 'INSTRUTOR' where cast(tipo as varchar) in ('PROFESSOR', 'ALUNO')");
+            jdbcTemplate.update("update chamados set status = 'CONCLUIDO' where cast(status as varchar) = 'FINALIZADO'");
+        } catch (Exception ignored) {
+            // Ignora se o banco nao contiver valores legados ou se a coluna for restrita por enum
+        }
     }
 }
