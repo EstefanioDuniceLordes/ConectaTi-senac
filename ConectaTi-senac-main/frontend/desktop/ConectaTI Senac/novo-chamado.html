@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#6C63FF">
+    <title>Novo Chamado - ConectaTI Senac</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="10" fill="url(#grad1)"/>
+                    <text x="20" y="27" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="white" text-anchor="middle">CT</text>
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#6C63FF;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#FF6B6B;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1>ConectaTI</h1>
+        </div>
+        <nav class="sidebar-nav">
+            <p class="nav-label">Menu</p>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="chamados.html">Chamados</a>
+            <a href="novo-chamado.html" class="active">Novo Chamado</a>
+            <a href="equipamentos.html">Equipamentos</a>
+            <a href="relatorios.html">Relatórios</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <div>
+                    <div class="user-name" id="userName">Usuário</div>
+                    <div class="user-perfil" id="userPerfil">Perfil</div>
+                </div>
+            </div>
+            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color);">
+                <a href="index.html" onclick="localStorage.clear(); mostrarNotificacao('Saindo do sistema...', 'info');" class="btn btn-danger btn-sm" style="width:100%;">Sair</a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="fecharSidebar()"></div>
+
+    <main class="main-content">
+        <header class="content-header">
+            <div class="page-title">
+                <h1>Novo Chamado</h1>
+                <p>Abra uma nova solicitação</p>
+            </div>
+            <div class="header-actions">
+                <span class="date-display" id="dataAtual"></span>
+                <button class="menu-toggle" onclick="toggleSidebar()">Menu</button>
+                <button onclick="toggleTheme()" class="btn btn-secondary btn-sm" title="Alternar tema">Tema</button>
+                <a href="index.html" onclick="localStorage.clear(); mostrarNotificacao('Saindo do sistema...', 'info');" class="btn btn-danger btn-sm">Sair</a>
+            </div>
+        </header>
+
+        <div class="form-container">
+            <div class="form-header">
+                <div class="logo">N</div>
+                <h1>Nova Solicitação</h1>
+            </div>
+
+            <form id="formChamado" onsubmit="enviarChamado(event)">
+                <div class="form-group">
+                    <label for="solicitante">Nome do Solicitante</label>
+                    <input type="text" id="solicitante" placeholder="Digite seu nome completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="perfilChamado">Perfil</label>
+                    <select id="perfilChamado" required>
+                        <option value="Instrutor">Instrutor</option>
+                        <option value="Suporte TI">Suporte TI</option>
+                        <option value="Coordenacao">Coordenação</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="grupoTurma" style="display:none;">
+                    <label for="turma">Turma (se for instrutor)</label>
+                    <input type="text" id="turma" placeholder="Ex: TADS 2024.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="sala">Sala / Ambiente</label>
+                    <select id="sala" required>
+                        <option value="" disabled selected>Selecione a sala ou ambiente</option>
+                        <option value="Não Informar">Não Informar</option>
+                        
+                        <optgroup label="Salas de Aula">
+                            <option value="Sala 01">Sala 01</option>
+                            <option value="Sala 02">Sala 02</option>
+                            <option value="Sala 03">Sala 03</option>
+                            <option value="Sala 04">Sala 04</option>
+                            <option value="Sala 05">Sala 05</option>
+                            <option value="Sala 06">Sala 06</option>
+                            <option value="Sala 07">Sala 07</option>
+                            <option value="Sala 08">Sala 08</option>
+                            <option value="Sala 09">Sala 09</option>
+                            <option value="Sala 10">Sala 10</option>
+                            <option value="Sala 11">Sala 11</option>
+                            <option value="Sala 12">Sala 12</option>
+                            <option value="Sala 13">Sala 13</option>
+                            <option value="Sala 14">Sala 14</option>
+                            <option value="Sala 15">Sala 15</option>
+                            <option value="Sala 16">Sala 16</option>
+                            <option value="Sala 17">Sala 17</option>
+                            <option value="Sala 18">Sala 18</option>
+                            <option value="Sala 19">Sala 19</option>
+                            <option value="Sala 20">Sala 20</option>
+                            <option value="Sala 21">Sala 21</option>
+                            <option value="Sala 22">Sala 22</option>
+                            <option value="Sala 23">Sala 23</option>
+                            <option value="Sala 24">Sala 24</option>
+                            <option value="Sala 25">Sala 25</option>
+                            <option value="Sala 26">Sala 26</option>
+                            <option value="Sala 27">Sala 27</option>
+                            <option value="Sala 28">Sala 28</option>
+                            <option value="Sala 29">Sala 29</option>
+                            <option value="Sala 30">Sala 30</option>
+                        </optgroup>
+
+                        <optgroup label="Laboratórios">
+                            <option value="Lab Info 01">Laboratório de Informática 01</option>
+                            <option value="Lab Info 02">Laboratório de Informática 02</option>
+                            <option value="Lab Info 03">Laboratório de Informática 03</option>
+                            <option value="Lab Info 04">Laboratório de Informática 04</option>
+                            <option value="Lab Info 05">Laboratório de Informática 05</option>
+                            <option value="Lab Hardware">Laboratório de Hardware e Redes</option>
+                            <option value="Lab Enfermagem">Laboratório de Enfermagem / Saúde</option>
+                            <option value="Cozinha Pedagogica">Cozinha Pedagógica / Gastronomia</option>
+                        </optgroup>
+
+                        <optgroup label="Áreas Comuns e Administrativas">
+                            <option value="Auditorio">Auditório Principal</option>
+                            <option value="Biblioteca">Biblioteca</option>
+                            <option value="Secretaria">Secretaria Acadêmica</option>
+                            <option value="Coordenacao">Coordenação Pedagógica</option>
+                            <option value="Sala dos Professores">Sala dos Professores</option>
+                            <option value="Recepcao">Recepção / Atendimento</option>
+                            <option value="Diretoria">Diretoria</option>
+                            <option value="Refeitorio">Refeitório / Cantina</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="horario">Horário da Solicitação</label>
+                    <input type="time" id="horario" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" required>
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        
+                        <optgroup label="Tecnologia da Informação (TI)">
+                            <option value="Reserva de notebooks">Reserva de Notebooks</option>
+                            <option value="Computador com defeito">Computador com Defeito / Hardware</option>
+                            <option value="Problema com Internet">Problema com Internet / Redes</option>
+                            <option value="Instalação de Software">Instalação / Configuração de Software</option>
+                            <option value="Projetor">Projetor / Datashow</option>
+                            <option value="Impressora">Impressora / Tinteiro</option>
+                            <option value="Cabo HDMI">Cabo HDMI ou Adaptador</option>
+                            <option value="Perifericos">Mouse / Teclado / Periféricos</option>
+                            <option value="Sistemas Senac">Acesso a Sistemas Senac / Permissões</option>
+                        </optgroup>
+
+                        <optgroup label="Infraestrutura e Manutenção">
+                            <option value="Ar-Condicionado">Ar-Condicionado / Climatização</option>
+                            <option value="Eletrica">Iluminação e Parte Elétrica</option>
+                            <option value="Mobiliario">Mobiliário (Cadeiras, Mesas, Portas)</option>
+                            <option value="Hidraulica">Hidráulica e Encanamento</option>
+                        </optgroup>
+
+                        <optgroup label="Serviços Gerais e Apoio">
+                            <option value="Limpeza">Limpeza e Higienização</option>
+                            <option value="Seguranca">Segurança e Controle de Acesso</option>
+                            <option value="Apoio Eventos">Suporte a Eventos e Auditório</option>
+                            <option value="Outros">Outros</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="prioridade">Prioridade</label>
+                    <select id="prioridade" required>
+                        <option value="Baixa">Baixa</option>
+                        <option value="Média">Média</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Urgente">Urgente</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Descrição do Problema</label>
+                    <textarea id="descricao" rows="4" placeholder="Descreva detalhadamente o problema..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Enviar Chamado</button>
+            </form>
+        </div>
+    </main>
+
+    <nav class="tab-bar">
+        <ul>
+            <li><a href="dashboard.html">Inicio</a></li>
+            <li><a href="chamados.html">Chamados</a></li>
+            <li><a href="novo-chamado.html" class="active">Novo</a></li>
+            <li><a href="equipamentos.html">Equip.</a></li>
+            <li><a href="index.html" onclick="localStorage.clear(); mostrarNotificacao('Saindo do sistema...', 'info');">Sair</a></li>
+        </ul>
+    </nav>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
