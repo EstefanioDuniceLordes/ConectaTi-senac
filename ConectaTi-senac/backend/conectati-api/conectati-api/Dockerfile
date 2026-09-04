@@ -16,7 +16,7 @@ WORKDIR /app
 # Desativa a geracao do arquivo jar-plain para evitar conflitos no COPY
 ENV GRADLE_OPTS="-Dorg.gradle.daemon=false"
 
-COPY --from=build /app/build/libs/*-SNAPSHOT.jar app.jar
+COPY --from=build /app/build/libs/*.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
