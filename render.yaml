@@ -2,9 +2,8 @@ services:
   # Backend Spring Boot API
   - type: web
     name: conectati-api
-    runtime: docker
-    dockerfilePath: backend/conectati-api/conectati-api/Dockerfile
-    dockerContext: backend/conectati-api/conectati-api
+    dockerfilePath: Dockerfile
+    dockerContext: .
     plan: free
     region: oregon
     envVars:
@@ -21,8 +20,8 @@ services:
   - type: web
     name: conectati-web
     runtime: static
-    buildCommand: cd "frontend/web-mobile/conectati-senac-react (1)" && npm install && npm run build
-    staticPublishPath: frontend/web-mobile/conectati-senac-react (1)/.output/public
+    buildCommand: cd "ConectaTi-senac/frontend/web-mobile/conectati-senac-react (1)" && npm install && npm run build
+    staticPublishPath: ConectaTi-senac/frontend/web-mobile/conectati-senac-react (1)/.output/public
     plan: free
     region: oregon
     routes:
@@ -42,4 +41,3 @@ databases:
     user: conectati
     plan: free
     region: oregon
-

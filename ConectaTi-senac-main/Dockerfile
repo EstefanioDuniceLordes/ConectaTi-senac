@@ -3,8 +3,8 @@ FROM gradle:8.6-jdk21-alpine AS build
 WORKDIR /app
 
 # Copia os arquivos de configuracao do Gradle e codigo fonte do backend
-COPY ConectaTi-senac/backend/conectati-api/conectati-api/build.gradle ConectaTi-senac/backend/conectati-api/conectati-api/settings.gradle* ./
-COPY ConectaTi-senac/backend/conectati-api/conectati-api/src ./src
+COPY backend/conectati-api/conectati-api/build.gradle backend/conectati-api/conectati-api/settings.gradle* ./
+COPY backend/conectati-api/conectati-api/src ./src
 
 RUN gradle clean bootJar -x test --no-daemon
 
@@ -17,3 +17,4 @@ COPY --from=build /app/build/libs/*.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
