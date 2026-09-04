@@ -2,9 +2,8 @@ services:
   # Backend Spring Boot API
   - type: web
     name: conectati-api
-    runtime: docker
-    dockerfilePath: backend/conectati-api/conectati-api/Dockerfile
-    dockerContext: backend/conectati-api/conectati-api
+    dockerfilePath: Dockerfile
+    dockerContext: .
     plan: free
     region: oregon
     envVars:
