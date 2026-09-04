@@ -1,0 +1,44 @@
+services:
+  # Backend Spring Boot API
+  - type: web
+    name: conectati-api
+    runtime: docker
+    dockerfilePath: backend/conectati-api/conectati-api/Dockerfile
+    dockerContext: backend/conectati-api/conectati-api
+    plan: free
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DB_URL
+        fromDatabase:
+          name: conectati-db
+          property: connectionString
+      - key: DB_DRIVER
+        value: org.postgresql.Driver
+
+  # Frontend Web & Mobile (React / TanStack / Vite)
+  - type: web
+    name: conectati-web
+    runtime: static
+    buildCommand: cd "frontend/web-mobile/conectati-senac-react (1)" && npm install && npm run build
+    staticPublishPath: frontend/web-mobile/conectati-senac-react (1)/.output/public
+    plan: free
+    region: oregon
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: conectati-api
+          property: host
+
+databases:
+  - name: conectati-db
+    databaseName: conectati
+    user: conectati
+    plan: free
+    region: oregon
